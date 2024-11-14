@@ -62,6 +62,8 @@ class _GroceryListState extends State<GroceryList> {
     setState(() {
       _groceryItems.remove(item);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item has been deleted")));
     final url=Uri.https("flutter-prep-28906-default-rtdb.firebaseio.com","Shopping-list/${item.id}.json");//add item is, to not point at the whole shopping list
     final response=await http.delete(url);
     if(response.statusCode>=400){
@@ -99,3 +101,4 @@ class _GroceryListState extends State<GroceryList> {
     );
   }
 }
+
